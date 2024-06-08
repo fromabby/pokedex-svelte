@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Header, Footer } from '$common'
-
 	$: url = 'https://pokeapi.co/api/v2/pokemon'
 	$: offset = 0
 	$: limit = 25
@@ -34,7 +32,6 @@
 	}
 </script>
 
-<Header />
 <main>
 	<h1 style="display:inline-block;">Pokedex</h1>
 	{#if selectedPokemons.length > 0}
@@ -101,7 +98,6 @@
 		<p>An error occurred!</p>
 	{/await}
 </main>
-<Footer />
 
 <style>
 	main {
