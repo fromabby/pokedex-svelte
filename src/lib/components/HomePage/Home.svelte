@@ -3,7 +3,7 @@
 	$: offset = 0
 	$: limit = 25
 
-	const fetchPokemons = async (url: string, offset: number, limit: number) => {
+	$: fetchPokemons = async (url: string, offset: number, limit: number) => {
 		const response = await fetch(`${url}?offset=${offset}&limit=${limit}`)
 		return await response.json()
 	}
