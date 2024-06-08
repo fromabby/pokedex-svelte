@@ -1,13 +1,13 @@
 <nav>
 	<ul>
 		<li>
-			<a href="link">Home</a>
+			<a href="/">Home</a>
 		</li>
 		<li>
-			<a href="link">Collections</a>
+			<a href="/collections">Collections</a>
 		</li>
 		<li>
-			<a href="link">Profile</a>
+			<a href="/login">Login</a>
 		</li>
 	</ul>
 </nav>
