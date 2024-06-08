@@ -1,7 +1,11 @@
-<script lang="ts">
+<script>
+	import '../app.css'
 	import { Header, Footer } from '$common'
 </script>
 
-<Header />
-<slot />
-<Footer />
+<Header></Header>
+<slot></slot>
+<Footer></Footer>
+<slot></slot>
+
+<style></style>

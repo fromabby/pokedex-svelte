@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { Button } from '$components/ui/button'
+
 	let username = ''
 	let password = ''
 
@@ -50,6 +52,7 @@
 			<p class="error">Invalid password</p>
 		{/if}
 		<button type="submit" on:click|preventDefault={handleSubmit}>Submit</button>
+		<Button>Click me</Button>
 	</form>
 	{#if submitted}
 		<p>Welcome {username}</p>
