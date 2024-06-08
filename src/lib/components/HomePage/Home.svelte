@@ -20,17 +20,39 @@
 	const getIDFromUrl = (v: string) => {
 		return v.split('https://pokeapi.co/api/v2/pokemon/')[1].split('/')[0]
 	}
+
+	let selectedPokemons: string[] = []
+	const selectPokemon = (name: string) => {
+		if (selectedPokemons.includes(name)) {
+			// unselect
+			selectedPokemons = selectedPokemons.filter((item) => item !== name)
+			selectedPokemons = selectedPokemons
+			return
+		}
+		selectedPokemons.push(name)
+		selectedPokemons = selectedPokemons
+	}
 </script>
 
 <Header />
 <main>
-	<h1>Pokedex</h1>
+	<h1 style="display:inline-block;">Pokedex</h1>
+	{#if selectedPokemons.length > 0}
+		<p style="display:inline-block;">
+			Selected: <strong>{selectedPokemons.length}</strong> pokemons
+		</p>
+	{/if}
 	{#await fetchPokemons(url, offset, limit)}
 		<p>...waiting</p>
 	{:then data}
 		<section class="pokedex">
 			{#each data.results as pokemon (pokemon.name)}
-				<div>
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					on:click={() => selectPokemon(pokemon.name)}
+					class={selectedPokemons.includes(pokemon.name) ? 'selected' : ''}
+				>
 					<img
 						src={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' +
 							getIDFromUrl(pokemon.url) +
@@ -91,6 +113,7 @@
 		gap: 1rem;
 		margin-top: 1rem;
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		user-select: none;
 	}
 
 	.pokedex > div {
@@ -101,6 +124,7 @@
 		display: grid;
 		grid-template-rows: subgrid;
 		grid-row: span 2;
+		cursor: pointer;
 	}
 
 	.pokedex > div > img {
@@ -135,5 +159,11 @@
 		gap: 1rem;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.selected {
+		background-color: rgba(0, 0, 0, 0.1);
+		transform: scale(1.05);
+		transition: transform 0.1s ease;
 	}
 </style>
